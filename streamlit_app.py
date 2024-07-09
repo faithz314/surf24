@@ -29,8 +29,8 @@ def main():
 
 
     text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
-    st.sidebar.header('User Input')
-    slider_value = st.sidebar.slider('Select a range', 0, 100, (25, 75))
+    st.sidebar.header('AKI Prediction Range')
+    slider_value = st.sidebar.slider('Select a range', 24, 200, (25, 75))
     
     checkbox = st.sidebar.checkbox('Show data')
 
