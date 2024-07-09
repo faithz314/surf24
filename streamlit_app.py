@@ -26,7 +26,9 @@ def main():
         st.subheader('Selected range:')
         st.write(slider_value)
 
-    st.write("Upload valid csv file here containing patient data")
+
+
+    st.title("Upload valid csv file here containing patient data")
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
     # Check if file was uploaded and process if so
