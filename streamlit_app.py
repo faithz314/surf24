@@ -10,6 +10,8 @@ def main():
     st.title('AKI Prediction Dashboard')
     st.write("For Patient No:", hadm_id)
 
+
+    st.title("upload csv file here")
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
     # Check if file was uploaded and process if so
