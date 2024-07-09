@@ -6,12 +6,14 @@ import numpy as np
 import matplotlib as plt
 
 def main():
+    hadm_id= 'placeholder-here-for-now'
     st.title('AKI Prediction Dashboard')
-    st.write("Hello, world!")
+    st.write("For Patient No:", hadm_id)
 
+    text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
     st.sidebar.header('User Input')
     slider_value = st.sidebar.slider('Select a range', 0, 100, (25, 75))
-    text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
+    
     checkbox = st.sidebar.checkbox('Show data')
 
         # Displaying content based on user inputs
