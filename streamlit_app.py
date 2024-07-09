@@ -7,11 +7,26 @@ import numpy as np
 
 def main():
     hadm_id= 'placeholder-here-for-now'
+
+    # Sidebar
+    text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
+    st.sidebar.header('AKI Prediction Range')
+    slider_value = st.sidebar.slider('Select a range', 24, 200, (25, 75))
+    checkbox = st.sidebar.checkbox('Show data')
+
+
+    #Main interface
     st.title('AKI Prediction Dashboard')
     st.write("For Patient No:", hadm_id)
 
+    #user inputs:
+    st.write(f'Hello, {text_input}!')
+    
+    if checkbox:
+        st.subheader('Selected range:')
+        st.write(slider_value)
 
-    st.title("upload csv file here")
+    st.subtitle("Upload valid csv file here containing patient data")
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
     # Check if file was uploaded and process if so
@@ -24,22 +39,6 @@ def main():
         st.write(df)
 
 
-
-
-
-
-    text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
-    st.sidebar.header('AKI Prediction Range')
-    slider_value = st.sidebar.slider('Select a range', 24, 200, (25, 75))
-    
-    checkbox = st.sidebar.checkbox('Show data')
-
-    # Displaying content based on user inputs
-    st.write(f'Hello, {text_input}!')
-    
-    if checkbox:
-        st.subheader('Selected range:')
-        st.write(slider_value)
 
     # Plotting example
     if st.button('Plot'):
