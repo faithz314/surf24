@@ -22,9 +22,9 @@ def main():
     #user inputs:
     st.write(f'Hello, {text_input}!')
     
-    if checkbox:
-        st.subheader('Selected range:')
-        st.write(slider_value)
+    # if checkbox:
+    #     st.subheader('Selected range:')
+    #     st.write(slider_value)
 
 
 
