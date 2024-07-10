@@ -35,13 +35,16 @@ def main():
 
     if uploaded_file is not None:
         csv = pd.read_csv(uploaded_file)
+
+        st.write(csv)
+        
         
 
-        predictions, df_predictions = animatedgraph1.make_file(csv)
-        st.write("### Original DataFrame")
-        st.write(predictions.head())  # Display some data from the CSV file
+        # predictions, df_predictions = animatedgraph1.make_file(csv)
+        # st.write("### Original DataFrame")
+        # st.write(predictions.head())  # Display some data from the CSV file
 
-        animatedgraph1.create_animation(predictions, df_predictions)
+        # animatedgraph1.create_animation(predictions, df_predictions)
 
 
 
@@ -55,6 +58,15 @@ if __name__ == '__main__':
 
 
 
+
+
+    # if st.button('Generate Plot'):
+    #     # Clear previous plot (if any)
+    #     plt.clf()
+    #     generate_plot()
+
+    #     # Display the plot within the Streamlit app
+    #     st.pyplot()
 
 
 

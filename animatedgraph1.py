@@ -2,6 +2,7 @@
 
 import matplotlib
 matplotlib.use('TkAgg') 
+import streamlit as st
 
 
 import numpy as np
@@ -65,6 +66,8 @@ def create_animation(predictions1, df_predictions1):
         update(predictions1, df_predictions1, frame)
         plt.pause(0.1)  # Pause for 0.1 seconds (adjust as needed)
         plt.draw()  # Update the plot
+
+    st.pyplot()
 
     
     # anim = animation.FuncAnimation(fig, update, frames=len(df_predictions1), interval=100)
