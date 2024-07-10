@@ -1,10 +1,14 @@
 # app.py
 
 import streamlit as st
-#from Animation import make_file, update, create_animation
+import Animation
 import pandas as pd
 import numpy as np
-import matplotlib as plt
+import matplotlib
+matplotlib.use('TkAgg') 
+
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 def main():
     hadm_id= 'placeholder-here-for-now'
@@ -51,5 +55,18 @@ def main():
         st.pyplot()
 
 
+    #Plotting ACTUAL
+    predictions, df_predictions= Animation.make_file(uploaded_file)
+    Animation.create_animation(df_predictions)
+
+
+
+
+
 if __name__ == '__main__':
     main()
+
+
+
+
+
