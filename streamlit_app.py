@@ -1,4 +1,5 @@
 # app.py
+from autogluon.tabular import TabularDataset, TabularPredictor
 
 import streamlit as st
 import RealTimeDetection
