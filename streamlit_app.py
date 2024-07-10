@@ -4,7 +4,7 @@ import streamlit as st
 # import RealTimeDetection
 import pandas as pd
 import numpy as np
-import animatedgraph1
+#import animatedgraph1
 matplotlib
 matplotlib.use('TkAgg') 
 
