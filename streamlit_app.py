@@ -5,9 +5,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import animatedgraph1
-import matplotlib
+matplotlib
 matplotlib.use('TkAgg') 
-from io import BytesIO
 
 
 import matplotlib.pyplot as plt
