@@ -1,7 +1,7 @@
 # app.py
 
 import streamlit as st
-#import Animation
+import Animation
 import pandas as pd
 import numpy as np
 # matplotlib.use('TkAgg') 
