@@ -1,7 +1,7 @@
 # app.py
 
 import streamlit as st
-import Animation
+import animatedgraph1
 import pandas as pd
 import numpy as np
 import matplotlib
