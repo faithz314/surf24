@@ -1,6 +1,6 @@
-streamlit==1.8.0
-matplotlib==3.5.1
-pandas==1.4.0
-scikit-learn==0.24.2
-autogluon==1.1.1
+streamlit
+matplotlib
+pandas
+scikit-learn
+autogluon
 
