@@ -4,7 +4,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 
 
-def hrly_prediction_probability(raw_data):
+def hourly_probability_predictor(raw_data):
     
 
     #STEP 1 OF REAL TIME DETECTION: Take a raw CSV file and running the LR algorithm on it for each hour of the csv file
@@ -18,30 +18,22 @@ def hrly_prediction_probability(raw_data):
     feature_importance = predictor.feature_importance(raw_data)
     print(feature_importance)
 
+    # #STEP 3: creating a SECOND CSV file that combines the basic information of each hour and the predicted risk for each hour
 
-
-
-    #STEP 3: creating a SECOND CSV file that combines the basic information of each hour and the predicted risk for each hour
-    csv_raw = pd.read_csv('C:/Users/faith/OneDrive/Documents/FaithZhang/SURF/RealTimeDetection/daily_maxmin/REPO/sample-raw.csv')
-
-    hadm_id= csv_raw['hadm_id'][1]
+    hadm_id= raw_data['hadm_id'][0]
 
     df_predictions= pd.DataFrame({
-        'time': csv_raw['time'],
-        'hadm_id': csv_raw['hadm_id'],
+        'time': raw_data['time'],
+        'hadm_id': raw_data['hadm_id'],
         'Prediction: Risk of AKI': y_pred_proba[1],
-        'Actual AKI Risk Result': csv_raw['AKI_in_24']
+        'Actual AKI Risk Result': raw_data['AKI_in_24'] #ACTUALly GET RID OF THIS FOR NORMAL DATA!!!!!
         })
 
-    df_predictions.to_csv(f'{hadm_id}.csv', index=False)
+
+    return feature_importance, df_predictions
 
 
-
-
-
-
-
-
+    
 
 
 

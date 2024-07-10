@@ -67,11 +67,20 @@ def create_animation(predictions1, df_predictions1):
         plt.pause(0.1)  # Pause for 0.1 seconds (adjust as needed)
         plt.draw()  # Update the plot
 
-    st.pyplot()
+    st.pyplot(fig)
 
     
     # anim = animation.FuncAnimation(fig, update, frames=len(df_predictions1), interval=100)
 
     #plt.show()
 
+
+
+    # if st.button('Generate Plot'):
+    #     # Clear previous plot (if any)
+    #     plt.clf()
+    #     generate_plot()
+
+    #     # Display the plot within the Streamlit app
+    #     st.pyplot()
 
