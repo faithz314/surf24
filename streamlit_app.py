@@ -14,15 +14,14 @@ def main():
     hadm_id= 'placeholder-here-for-now'
 
     # Sidebar
-    text_input = st.sidebar.text_input('Clinician Name', 'John Doe')
+    text_input = st.sidebar.text_input('Clinician Name', '[John Doe]')
     st.sidebar.header('AKI Prediction Range')
     slider_value = st.sidebar.slider('Select a range', 24, 200, (25, 75))
     checkbox = st.sidebar.checkbox('Show data')
 
 
     #Main interface
-    st.title('AKI Prediction Dashboard')
-    st.write("For Patient No:", hadm_id)
+    st.title('AKI Prediction Dashboard- Patient No.:', hadm_id)
 
     #user inputs:
     st.write(f'Hello, {text_input}!')
@@ -32,32 +31,18 @@ def main():
     #     st.write(slider_value)
 
 
+    uploaded_file = st.file_uploader("Upload valid CSV file here", type=["csv"])
 
-    st.title("Upload valid csv file here containing patient data")
-    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
-
-    # Check if file was uploaded and process if so
     if uploaded_file is not None:
-        # Read CSV file
-        df = pd.read_csv(uploaded_file)
+        csv = pd.read_csv(uploaded_file)
         
-        # Display the dataframe
-        st.write("### Uploaded Data:")
-        st.write(df)
 
+        predictions, df_predictions = animatedgraph1.make_file(csv)
+        st.write("### Original DataFrame")
+        st.write(predictions.head())  # Display some data from the CSV file
 
+        animatedgraph1.create_animation(predictions, df_predictions)
 
-    # Plotting example
-    if st.button('Plot'):
-        data = np.random.randn(100, 2)
-        df = pd.DataFrame(data, columns=['x', 'y'])
-        plt.scatter(df['x'], df['y'])
-        st.pyplot()
-
-
-    #Plotting ACTUAL
-    predictions, df_predictions= animatedgraph1.make_file(uploaded_file)
-    animatedgraph1.create_animation(df_predictions)
 
 
 
@@ -65,6 +50,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
 
 
 

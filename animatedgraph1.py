@@ -17,9 +17,9 @@ import matplotlib.animation as animation
 
 
 
-def make_file(csv):
-    predictions= pd.read_csv(csv) #C:/Users/faith/OneDrive/Documents/FaithZhang/SURF/RealTimeDetection/daily_maxmin/REPO/sample-patient.csv
-    predictions.head()
+def make_file(predictions):
+    #predictions= pd.read_csv(csv) #C:/Users/faith/OneDrive/Documents/FaithZhang/SURF/RealTimeDetection/daily_maxmin/REPO/sample-patient.csv
+    #predictions.head()
 
 
     df_predictions = pd.DataFrame({
@@ -27,7 +27,7 @@ def make_file(csv):
         'Predicted': predictions['Prediction: Risk of AKI'],
         'Actual':predictions['Actual AKI Risk Result'],
     })
-
+    print("MADE IT")
     return predictions, df_predictions
 
 
@@ -69,6 +69,6 @@ def create_animation(predictions1, df_predictions1):
     
     # anim = animation.FuncAnimation(fig, update, frames=len(df_predictions1), interval=100)
 
-    plt.show()
+    #plt.show()
 
 
