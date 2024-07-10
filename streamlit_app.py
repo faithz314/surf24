@@ -1,8 +1,7 @@
 # app.py
-from autogluon.tabular import TabularDataset, TabularPredictor
 
 import streamlit as st
-import RealTimeDetection
+# import RealTimeDetection
 import pandas as pd
 import numpy as np
 import animatedgraph1
