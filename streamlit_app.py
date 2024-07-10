@@ -35,7 +35,7 @@ def main():
 
 
     #Replicated Plot here:
-    csv_placeholder= pd.read_csv('C:/Users/faith/OneDrive/Documents/FaithZhang/SURF/RealTimeDetection/daily_maxmin/REPO/sample-patient.csv')
+    csv_placeholder= pd.read_csv('./sample-patient.csv')
 
     if st.button('See Sample Prediction Graph'):
         predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
