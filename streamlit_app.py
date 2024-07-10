@@ -5,7 +5,7 @@ import animatedgraph1
 import RealTimeDetection
 import pandas as pd
 import numpy as np
-import matplotlib
+#import matplotlib
 matplotlib.use('TkAgg') 
 
 import matplotlib.pyplot as plt
