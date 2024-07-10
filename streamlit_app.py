@@ -1,9 +1,10 @@
 # app.py
 
 import streamlit as st
+from Animation import make_file, update, create_animation
 import pandas as pd
 import numpy as np
-#import matplotlib as plt
+import matplotlib as plt
 
 def main():
     hadm_id= 'placeholder-here-for-now'
@@ -37,7 +38,7 @@ def main():
         df = pd.read_csv(uploaded_file)
         
         # Display the dataframe
-        st.write("### Uploaded DataFrame:")
+        st.write("### Uploaded Data:")
         st.write(df)
 
 
