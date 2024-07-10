@@ -1,4 +1,4 @@
-from autogluon.tabular import TabularDataset, TabularPredictor
+from autogluon.tabular import TabularPredictor
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
 
