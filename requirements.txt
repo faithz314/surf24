@@ -4,4 +4,4 @@ pandas
 scikit-learn
 autogluon
 autogluon.tabular
-
+scipy
