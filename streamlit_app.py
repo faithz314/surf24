@@ -1,14 +1,14 @@
 # app.py
 
 import streamlit as st
-import Animation
+#import Animation
 import pandas as pd
 import numpy as np
 import matplotlib
-matplotlib.use('TkAgg') 
+# matplotlib.use('TkAgg') 
 
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+# import matplotlib.pyplot as plt
+# import matplotlib.animation as animation
 
 def main():
     hadm_id= 'placeholder-here-for-now'
