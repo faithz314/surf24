@@ -1,11 +1,11 @@
-# app.py
+
 
 import streamlit as st
-# import RealTimeDetection
+import RealTimeDetection
 import pandas as pd
 import numpy as np
-#import animatedgraph1
-import matplotlib.pyplot as plt
+import animatedgraph1
+import matplotlib as plt
 plt.use('TkAgg') 
 
 
