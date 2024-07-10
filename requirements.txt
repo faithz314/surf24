@@ -3,4 +3,5 @@ matplotlib
 pandas
 scikit-learn
 autogluon
+autogluon.tabular
 
