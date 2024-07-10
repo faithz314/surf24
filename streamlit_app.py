@@ -5,10 +5,10 @@ import animatedgraph1
 import pandas as pd
 import numpy as np
 import matplotlib
-# matplotlib.use('TkAgg') 
+matplotlib.use('TkAgg') 
 
-# import matplotlib.pyplot as plt
-# import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+# import plt.animation as animation
 
 def main():
     hadm_id= 'placeholder-here-for-now'
@@ -56,8 +56,8 @@ def main():
 
 
     #Plotting ACTUAL
-    predictions, df_predictions= Animation.make_file(uploaded_file)
-    Animation.create_animation(df_predictions)
+    predictions, df_predictions= animatedgraph1.make_file(uploaded_file)
+    animatedgraph1.create_animation(df_predictions)
 
 
 
