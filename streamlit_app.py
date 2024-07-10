@@ -2,6 +2,7 @@
 
 import streamlit as st
 import animatedgraph1
+import RealTimeDetection
 import pandas as pd
 import numpy as np
 import matplotlib
@@ -37,9 +38,23 @@ def main():
         csv = pd.read_csv(uploaded_file)
 
         st.write(csv)
+
+        #1)UPLOAD RAW CSV data here
+        #2)RUN THE MACHINE LEARNING ALGORITHM ON IT
+        def on_button_click():
+            RealTimeDetection.hourly_probability_predictor(csv)
         
+        #3) SPITS OUT A NEW CSV FILE WITH EACH HOURLY PREDICTION
         
 
+        
+        if st.button('Run Algorithm!'):
+            on_button_click()
+
+        #4) SPITS OUT 1) STATISTICS + 2 visualization
+
+        
+        #FIX THIS!!!: animation is based on updated data
         # predictions, df_predictions = animatedgraph1.make_file(csv)
         # st.write("### Original DataFrame")
         # st.write(predictions.head())  # Display some data from the CSV file
