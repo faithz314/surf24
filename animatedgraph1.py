@@ -1,14 +1,15 @@
 # Python file for streamlit app
 
 import matplotlib
-matplotlib.use('TkAgg') 
+# matplotlib.use('TkAgg') 
 import streamlit as st
-
+import time
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+
 
 
 #import seaborn as sns
@@ -34,40 +35,43 @@ def make_file(predictions):
 
 
 
-def create_animation(predictions1, df_predictions1):
 
-    fig = plt.figure(figsize=(10, 6))
-
-
-    def update(predictions, df_predictions, frame):
-        plt.cla()  # clears the plot
-        plt.axhline(y=0.5, color='green', linestyle='-', label='50% Risk Of AKI')
-
-        plt.plot(df_predictions['Hour'][:frame+1], df_predictions['Predicted'][:frame+1], label='Predicted Risk')
-        plt.fill_between(df_predictions['Hour'][:frame+1], 0, 1,where=(df_predictions['Actual'][:frame+1] ==1), color='red', alpha=0.3, label= "AKI Actually Detected")
-
-        patient_no = predictions['hadm_id'][0]
-        hour= df_predictions['Hour'][frame]
+    #fig, ax = plt.subplot()
 
 
-        plt.legend()
-        plt.xlabel('Hours (After ICU Admission)')
-        plt.ylabel('% Risk of AKI For The Next 24 Hours')
-        plt.title(f'Hourly Predictions of AKI Risk For Patient No.: {patient_no}')
+def update(predictions, df_predictions, fig, ax, frame):
+    ax.clear()  # clears the plot
+    ax.axhline(y=0.5, color='green', linestyle='-', label='50% Risk Of AKI')
+
+    ax.plot(df_predictions['Hour'][:frame+1], df_predictions['Predicted'][:frame+1], label='Predicted Risk')
+    ax.fill_between(df_predictions['Hour'][:frame+1], 0, 1,where=(df_predictions['Actual'][:frame+1] ==1), color='red', alpha=0.3, label= "AKI Actually Detected")
+
+    patient_no = predictions['hadm_id'][0]
+    hour= df_predictions['Hour'][frame]
 
 
-        plt.xlim(0,len(df_predictions))
-        plt.ylim(df_predictions['Predicted'].min(),1)
-        plt.grid(True)
-        plt.tight_layout()
+    ax.legend()
+    ax.set_xlabel('Hours (After ICU Admission)')
+    ax.set_ylabel('% Risk of AKI For The Next 24 Hours')
+    ax.set_title(f'Hourly Predictions of AKI Risk For Patient No.: {patient_no}')
 
 
-    for frame in range(len(df_predictions1)):
-        update(predictions1, df_predictions1, frame)
-        plt.pause(0.1)  # Pause for 0.1 seconds (adjust as needed)
+    ax.set_xlim(0,len(df_predictions))
+    ax.set_ylim(df_predictions['Predicted'].min(),1)
+    ax.grid(True)
+    # ax.tight_layout()
+
+
+def animate(predictions, df_predictions, fig, axs):
+    for frame in range(len(df_predictions)):
+        update(predictions, df_predictions, fig, axs, frame)
+        #plt.pause(0.1)  # Pause for 0.1 seconds (adjust as needed)
+        time.sleep(0.1)
         plt.draw()  # Update the plot
 
-    st.pyplot(fig)
+
+
+    # st.pyplot(fig)
 
     
     # anim = animation.FuncAnimation(fig, update, frames=len(df_predictions1), interval=100)
@@ -83,4 +87,5 @@ def create_animation(predictions1, df_predictions1):
 
     #     # Display the plot within the Streamlit app
     #     st.pyplot()
+
 

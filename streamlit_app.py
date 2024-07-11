@@ -12,7 +12,11 @@ plt.use('TkAgg')
 import matplotlib.pyplot as plt
 # import plt.animation as animationgit
 
+
+
 def main():
+
+    
     id_placeholder= 'XXXXXXX'
 
     # Sidebar
@@ -30,19 +34,23 @@ def main():
     # if checkbox:
     #     st.subheader('Selected range:')
     #     st.write(slider_value)
-
-
-
-
-    #Replicated Plot here:
+    
     csv_placeholder= pd.read_csv('./sample-patient.csv')
 
-    if st.button('See Sample Prediction Graph'):
-        predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
-        st.write("### Original DataFrame")
-        st.write(predictions.head())  # Display some data from the CSV file
-        animatedgraph1.create_animation(predictions, df_predictions)
-        st.pyplot()
+    
+    with st.expander("Learn More About AKI Predictor"):
+        st.write("AKI Predictor uses a basic Logistic Regression model with penalty to predict AKI in the next 24 hours.")
+        #Replicated Plot here:
+        if st.button('See Sample Prediction Graph'):
+            fig, ax= plt.subplots()
+            predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
+            st.write("Sample Patient AKI Data")
+            st.write(predictions.head())  # Display some data from the CSV file
+            # animatedgraph1.create_animation(predictions, df_predictions)
+            animatedgraph1.animate(predictions, df_predictions, fig, ax)
+
+            st.pyplot(fig)
+
 
 
     #1)UPLOAD RAW CSV data here
