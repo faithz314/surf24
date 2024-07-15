@@ -8,7 +8,7 @@ def hourly_probability_predictor(raw_data):
     
 
     #STEP 1 OF REAL TIME DETECTION: Take a raw CSV file and running the LR algorithm on it for each hour of the csv file
-    predictor = TabularPredictor.load("C:/Users/faith/OneDrive/Documents/FaithZhang/SURF/RealTimeDetection/daily_maxmin/REPO/auto_gluonModels/daily_target_accuracy_penaltyLR", require_version_match= False)
+    predictor = TabularPredictor.load("./auto_gluonModels/daily_target_accuracy_penaltyLR", require_version_match= False)
     actual_predictions= predictor.predict(raw_data)
     y_pred_proba = predictor.predict_proba((raw_data))
     print("printing here:", actual_predictions, y_pred_proba)
