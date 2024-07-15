@@ -1,6 +1,5 @@
 # Python file for streamlit app
 
-import matplotlib
 # matplotlib.use('TkAgg') 
 import streamlit as st
 import time

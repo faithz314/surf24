@@ -37,6 +37,13 @@ def main():
     csv_placeholder= pd.read_csv('./sample-patient.csv')
 
     
+    
+    with st.expander("How To Use AKI Predictor"):
+        st.write("It's simple!")
+        st.write("Step 1: Upload a raw CSV file that includes a patient's hourly vitals. Make sure your file has a 'time' column and a 'hadm_id' column that indicates a patient's ID.")
+        st.write("Step 2: Run the prediction algorithm. This may take a while to run.")
+        st.write("Step 3: Download the results. You will be able to view the feature importance as well as download a new CSV file that contains the AKI risk of the patient for each hour of the data submitted. ")
+    
     with st.expander("Learn More About AKI Predictor"):
         st.write("AKI Predictor uses a basic Logistic Regression model with penalty to predict AKI in the next 24 hours.")
         #Replicated Plot here:
@@ -45,10 +52,12 @@ def main():
             predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
             st.write("Sample Patient AKI Data")
             st.write(predictions.head())  # Display some data from the CSV file
-            # animatedgraph1.create_animation(predictions, df_predictions)
             animatedgraph1.animate(predictions, df_predictions, fig, ax)
 
             st.pyplot(fig)
+
+        st.markdown('[Click here to see a real-time animation of the sample patient data](https://drive.google.com/file/d/1mAwbjmCQy1-iNTjlaxtKNiEi53MCYgR4/view)')
+        st.write("(^^ I'm working on embedding this into this website!)")
 
 
 
