@@ -4,9 +4,9 @@ import streamlit as st
 import RealTimeDetection
 import pandas as pd
 import numpy as np
-# import animatedgraph1
+import animatedgraph1
 import matplotlib as plt
-
+plt.use('agg')
 
 import matplotlib.pyplot as plt
 # import plt.animation as animationgit
@@ -42,11 +42,11 @@ def main():
         #Replicated Plot here:
         if st.button('See Sample Prediction Graph'):
             fig, ax= plt.subplots()
-            # predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
+            predictions, df_predictions = animatedgraph1.make_file(csv_placeholder)
             st.write("Sample Patient AKI Data")
             st.write(predictions.head())  # Display some data from the CSV file
             # animatedgraph1.create_animation(predictions, df_predictions)
-            # animatedgraph1.animate(predictions, df_predictions, fig, ax)
+            animatedgraph1.animate(predictions, df_predictions, fig, ax)
 
             st.pyplot(fig)
 
