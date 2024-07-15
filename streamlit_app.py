@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 # import animatedgraph1
 import matplotlib as plt
-# plt.use('TkAgg') 
 
 
 import matplotlib.pyplot as plt
