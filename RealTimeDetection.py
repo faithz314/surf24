@@ -26,14 +26,17 @@ def hourly_probability_predictor(raw_data):
         'time': raw_data['time'],
         'hadm_id': raw_data['hadm_id'],
         'Prediction: Risk of AKI': y_pred_proba[1],
-        'Actual AKI Risk Result': raw_data['AKI_in_24'] #ACTUALly GET RID OF THIS FOR NORMAL DATA!!!!!
+        'AKI In 24?': raw_data['AKI_in_24'] 
         })
 
 
     return feature_importance, df_predictions
 
 
-    
+
+#print(hourly_probability_predictor('modified-sample-raw.csv'))
+
+
 
 
 

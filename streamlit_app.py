@@ -17,12 +17,18 @@ def main():
 
     
     id_placeholder= 'XXXXXXX'
+    options= ['36 hour window', '48 hour window', 'Expanding window', 'DIY']
 
     # Sidebar
     text_input = st.sidebar.text_input('Clinician Name', '[Enter Name Here]')
     st.sidebar.header('AKI Prediction Range')
-    slider_value = st.sidebar.slider('Select a range', 24, 200, (25, 75))
-    checkbox = st.sidebar.checkbox('Show data')
+
+
+    chosen = st.sidebar.radio('Choose a default model or build your own:', options)
+    if chosen == 'DIY':
+        st.sidebar.slider('Select your own prediction range', 24, 200, (24, 48))
+        st.sidebar.write('NOTE: if you select this option, it will take a long time to run + create an existing model')
+
 
 
     #Main interface
