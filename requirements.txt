@@ -2,6 +2,6 @@ streamlit
 matplotlib
 pandas
 scikit-learn
-autogluon== 1.1.1
-autogluon.tabular== 1.1.1
+autogluon== 1.1.0
+autogluon.tabular== 1.1.0
 scipy
