@@ -4,16 +4,10 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 
 
-<<<<<<< HEAD
 
 
 def hourly_probability_predictor(raw_data):
     
-=======
-def hourly_probability_predictor(raw_data):
-    
-
->>>>>>> 2d01cc5f9de089da081e7e5228cdf9cfb413e826
     #STEP 1 OF REAL TIME DETECTION: Take a raw CSV file and running the LR algorithm on it for each hour of the csv file
     predictor = TabularPredictor.load("./auto_gluonModels/daily_target_accuracy_penaltyLR", require_version_match= False)
     actual_predictions= predictor.predict(raw_data)
