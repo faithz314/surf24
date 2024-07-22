@@ -1,0 +1,14 @@
+streamlit
+matplotlib
+pandas
+scikit-learn
+<<<<<<< HEAD
+autogluon== 1.1.1
+autogluon.tabular== 1.1.1
+scipy
+python== 3.9
+=======
+autogluon== 1.1.0
+autogluon.tabular== 1.1.0
+scipy
+>>>>>>> 2d01cc5f9de089da081e7e5228cdf9cfb413e826
