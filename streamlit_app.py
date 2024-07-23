@@ -2,6 +2,7 @@
 
 import streamlit as st
 import RealTimeDetection
+import agraph2
 import pandas as pd
 import numpy as np
 import animatedgraph1
@@ -89,6 +90,9 @@ def main():
             file_name= f'{actual_id}.csv',
             mime='text/csv'
             )
+
+            if st.button('See Creatinine Comparision Visual'):
+                agraph2.creatinine_comparison(uploaded_file, new_df)
 
 
 if __name__ == '__main__':
