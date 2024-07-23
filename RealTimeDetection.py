@@ -7,12 +7,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 
 def hourly_probability_predictor(raw_data):
-    
     #STEP 1 OF REAL TIME DETECTION: Take a raw CSV file and running the LR algorithm on it for each hour of the csv file
-    predictor = TabularPredictor.load("./auto_gluonModels/daily_target_accuracy_penaltyLR")
+    predictor = TabularPredictor.load("./auto_gluonModels/daily_target_accuracy_penaltyLR", require_py_version_match=False)
+
     actual_predictions= predictor.predict(raw_data)
     y_pred_proba = predictor.predict_proba((raw_data))
     print("printing here:", actual_predictions, y_pred_proba)
+    print('RAWS', raw_data)
 
     #STEP 2: For the latest hour the doctor is predicting, give a list of statistics about that prediction
     #1) Feature Importance
@@ -20,9 +21,7 @@ def hourly_probability_predictor(raw_data):
     print(feature_importance)
 
     # #STEP 3: creating a SECOND CSV file that combines the basic information of each hour and the predicted risk for each hour
-
     hadm_id= raw_data['hadm_id'][0]
-
     df_predictions= pd.DataFrame({
         'time': raw_data['time'],
         'hadm_id': raw_data['hadm_id'],
@@ -31,11 +30,12 @@ def hourly_probability_predictor(raw_data):
         })
 
 
-    return feature_importance, df_predictions
+    return feature_importance, df_predictions 
 
 
 
-#print(hourly_probability_predictor('modified-sample-raw.csv'))
+#raw data isn't actually raw- it's read by read_csv
+# print(hourly_probability_predictor(pd.read_csv('sample-raw.csv')))
 
 
 
