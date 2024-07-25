@@ -122,8 +122,8 @@ def main():
                         st.session_state.feature_var= features
                 if st.session_state.features:
                     if st.button('Features Visual'):
-                        plot2= RealTimeDetection.features_visual(st.session_state.feature_var)
-                        st.pyplot(plot2)
+                        RealTimeDetection.features_visual(st.session_state.feature_var)
+                        
             
         if st.button('Reset Everything'):
         # Clear specific session state variables

@@ -52,18 +52,17 @@ def feature_importance(raw_data):
 
 
 def features_visual(feature_df):
-    feature_importance_df = pd.DataFrame(list(feature_importance.items()), columns=['Feature', 'Importance'])
 
-    # Sort by importance score for better visualization
-    feature_importance_df = feature_df.sort_values(by='Importance', ascending=False)
-
-    # Plot feature importance
     plt.figure(figsize=(10, 6))
-    plt.barh(feature_importance_df['Feature'], feature_importance_df['Importance'], color='skyblue')
+        #WE USE feature_df.INDEX because the vitals do not 
+
+    plt.bar(feature_df.index[feature_df['importance']!=0], feature_df['importance'][feature_df['importance']!=0], color='skyblue')
     plt.xlabel('Importance Score')
     plt.title('Feature Importance')
-    plt.gca().invert_yaxis()  # Invert y-axis to show most important feature at the top
-    plt.show()
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    st.pyplot(plt)
+    # plt.show()
 
 
 
