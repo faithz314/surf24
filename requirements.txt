@@ -5,3 +5,4 @@ scikit-learn
 autogluon== 1.1.1
 autogluon.tabular== 1.1.1
 scipy
+python==3.9

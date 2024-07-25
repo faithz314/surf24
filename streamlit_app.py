@@ -76,23 +76,59 @@ def main():
         title_placeholder.markdown(f"## AKI Prediction Dashboard- Patient No. : {actual_id}")
         st.write(csv)
 
-    
+
+        
     #2/3)RUN THE MACHINE LEARNING ALGORITHM ON IT + spits out statistics/visualizations
-        if st.button('Predict AKI'):
-            features, new_df= RealTimeDetection.hourly_probability_predictor(csv)
-            new_csv= new_df.to_csv(index=False).encode('utf-8')
+        if 'button_clicked' not in st.session_state:
+            st.session_state.button_clicked= False
+        if 'global_variable' not in st.session_state:
+            st.session_state.global_variable = None
+        if 'features' not in st.session_state:
+            st.session_state.features= False
+        if 'feature_var' not in st.session_state:
+            st.session_state.feature_var = None
 
-    #4)  SPITS OUT A NEW CSV FILE WITH EACH HOURLY PREDICTION
-            st.write(features)
-            st.download_button(
-            "Download Prediction Data",
-            new_csv,
-            file_name= f'{actual_id}.csv',
-            mime='text/csv'
-            )
 
-            if st.button('See Creatinine Comparision Visual'):
-                agraph2.creatinine_comparison(uploaded_file, new_df)
+
+
+        if not st.session_state.button_clicked:
+            if st.button('Predict AKI'):
+                st.session_state.button_clicked= True
+                new_df= RealTimeDetection.hourly_probability_predictor(csv)
+                st.session_state.global_variable= new_df
+                new_csv= new_df.to_csv(index=False).encode('utf-8')
+                
+
+                st.write("PREDICTION DATA (DOWNLOAD!):", new_df)
+                #4)  SPITS OUT A NEW CSV FILE WITH EACH HOURLY PREDICTION
+                
+                # st.download_button(
+                # "Download Prediction Data",
+                # new_csv,
+                # file_name= f'{actual_id}.csv',
+                # mime='text/csv'
+                # )
+            
+
+        with st.expander('Additional Options:'):
+            if st.session_state.button_clicked:
+                if st.button('See Creatinine Comparision Visual'):
+                    agraph2.creatinine_comparison(csv, st.session_state.global_variable)
+
+                if st.button('See Feature Importance'):
+                        features= RealTimeDetection.feature_importance(csv) 
+                        st.write("Most to least impactful features:", features)
+                        st.session_state.features= True
+                        st.session_state.feature_var= features
+                if st.session_state.features:
+                    if st.button('Features Visual'):
+                        plot2= RealTimeDetection.features_visual(st.session_state.feature_var)
+                        st.pyplot(plot2)
+            
+        if st.button('Reset Everything'):
+        # Clear specific session state variables
+            st.session_state.button_clicked = False
+            
 
 
 if __name__ == '__main__':

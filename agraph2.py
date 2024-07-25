@@ -28,8 +28,7 @@ def creatinine_comparison(raw_data, risk_results):
 
 
 
-def creatinidne_comparison(raw_data, risk_results):
-    #RISK RESULTS BEING THE DATAFRAME FROM PREDICTING ALGORITHM
+def heatmap():
+    null
 
-    x= raw_data['time']
 

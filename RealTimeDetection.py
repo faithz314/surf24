@@ -1,7 +1,12 @@
 from autogluon.tabular import TabularPredictor
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
-
+import streamlit as st
+import time
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 
 
@@ -15,12 +20,7 @@ def hourly_probability_predictor(raw_data):
     print("printing here:", actual_predictions, y_pred_proba)
     print('RAWS', raw_data)
 
-    #STEP 2: For the latest hour the doctor is predicting, give a list of statistics about that prediction
-    #1) Feature Importance
-    feature_importance = predictor.feature_importance(raw_data)
-    print(feature_importance)
-
-    # #STEP 3: creating a SECOND CSV file that combines the basic information of each hour and the predicted risk for each hour
+    # #STEP 2: creating a SECOND CSV file that combines the basic information of each hour and the predicted risk for each hour
     hadm_id= raw_data['hadm_id'][0]
     df_predictions= pd.DataFrame({
         'time': raw_data['time'],
@@ -28,9 +28,42 @@ def hourly_probability_predictor(raw_data):
         'Prediction: Risk of AKI': y_pred_proba[1],
         'AKI In 24?': raw_data['AKI_in_24'] 
         })
+    
 
 
-    return feature_importance, df_predictions 
+
+    return df_predictions 
+
+
+
+def feature_importance(raw_data):
+    #STEP 3: For the latest hour the doctor is predicting, give a list of statistics about that prediction
+    #1) Feature Importance ONLY IF they ask for it
+    predictor = TabularPredictor.load("./auto_gluonModels/daily_target_accuracy_penaltyLR", require_py_version_match=False)
+    feature_importance = predictor.feature_importance(raw_data)
+    print(feature_importance)
+
+    # predictor.feature_importance.plot()
+    # predictor.feature_importance.plot_pdp('FeatureName')
+
+
+    return(feature_importance)
+
+
+
+def features_visual(feature_df):
+    feature_importance_df = pd.DataFrame(list(feature_importance.items()), columns=['Feature', 'Importance'])
+
+    # Sort by importance score for better visualization
+    feature_importance_df = feature_df.sort_values(by='Importance', ascending=False)
+
+    # Plot feature importance
+    plt.figure(figsize=(10, 6))
+    plt.barh(feature_importance_df['Feature'], feature_importance_df['Importance'], color='skyblue')
+    plt.xlabel('Importance Score')
+    plt.title('Feature Importance')
+    plt.gca().invert_yaxis()  # Invert y-axis to show most important feature at the top
+    plt.show()
 
 
 
@@ -38,9 +71,60 @@ def hourly_probability_predictor(raw_data):
 # print(hourly_probability_predictor(pd.read_csv('sample-raw.csv')))
 
 
+#RAW DATA IS A READ CSV
+def halfday_probability_predictor(raw_data):
+    predictor = TabularPredictor.load("./ag_models_12hour/halfday_target_accuracy_penaltyLR", require_py_version_match=False)
+
+
+def probability_predictor_24_12(raw_data):
+    predictor = TabularPredictor.load("PLACEHOLDER", require_py_version_match=False)
+
+
+def expanding_window_predictor(raw_data):
+    predictor = TabularPredictor.load("PLACEHOLDER", require_py_version_match=False)
 
 
 
+
+
+def visualizations(predictions):
+
+
+
+
+
+        #fig, ax = plt.subplot()
+
+
+    def update(predictions, df_predictions, fig, ax, frame):
+        ax.clear()  # clears the plot
+        ax.axhline(y=0.5, color='green', linestyle='-', label='50% Risk Of AKI')
+
+        ax.plot(df_predictions['Hour'][:frame+1], df_predictions['Predicted'][:frame+1], label='Predicted Risk')
+        ax.fill_between(df_predictions['Hour'][:frame+1], 0, 1,where=(df_predictions['Actual'][:frame+1] ==1), color='red', alpha=0.3, label= "AKI Actually Detected")
+
+        patient_no = predictions['hadm_id'][0]
+        hour= df_predictions['Hour'][frame]
+
+
+        ax.legend()
+        ax.set_xlabel('Hours (After ICU Admission)')
+        ax.set_ylabel('% Risk of AKI For The Next 24 Hours')
+        ax.set_title(f'Hourly Predictions of AKI Risk For Patient No.: {patient_no}')
+
+
+        ax.set_xlim(0,len(df_predictions))
+        ax.set_ylim(df_predictions['Predicted'].min(),1)
+        ax.grid(True)
+        # ax.tight_layout()
+
+
+    def animate(predictions, df_predictions, fig, axs):
+        for frame in range(len(df_predictions)):
+            update(predictions, df_predictions, fig, axs, frame)
+            #plt.pause(0.1)  # Pause for 0.1 seconds (adjust as needed)
+            time.sleep(0.1)
+            plt.draw()  # Update the plot
 
 
 
